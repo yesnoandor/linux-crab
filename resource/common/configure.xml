@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file is a configure doc, please follow the format to expand, every item must have the value and command elements.The commnand element only have one which desribe the command path, if it has the same path with main process
+than use the / instead.The value element has two at least(success,fail),you can add value element ,the 'text' is a function return ,'resut' attribute is the desription for the value. -->
+<root>
+        <item name="MonitBase">
+                <value result="success">0</value>
+                <value result="fail">-1</value>
+                <value result="low memory">1</value>
+                <value result="read and write file error">2</value>
+                <value result="peripheral signal">3</value>
+                <command>/usr/bin/MonitBase</command>
+        </item>
+
+        <item name="MonitBase2">
+                <value result="success">0</value>
+                <value result="fail">-1</value>
+                <value result="low memory">1</value>
+                <value result="read and write file error">2</value>
+                <value result="peripheral signal">3</value>
+                <command>/usr/bin/MonitBase2</command>
+        </item>
+
+        <item name="MonitBase3">
+                <value result="success">0</value>
+                <value result="fail">-1</value>
+                <value result="low memory">1</value>
+                <value result="read and write file error">2</value>
+                <value result="peripheral signal">3</value>
+                <command>/usr/local/bin/MonitBase</command>
+        </item>
+</root>

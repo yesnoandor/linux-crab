@@ -1,0 +1,16 @@
+#libevent pkg-config source file
+
+prefix=/home/wenyu/work/diagnostic/linux-crab/libs/src/libevent-2.1.8-stable/x86
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libevent_pthreads
+Description: libevent_pthreads adds pthreads-based threading support to libevent
+Version: 2.1.8-stable
+Requires: libevent
+Conflicts:
+Libs: -L${libdir} -levent_pthreads
+Libs.private: -lcrypto  
+Cflags: -I${includedir} -pthread
+

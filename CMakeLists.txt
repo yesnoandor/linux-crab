@@ -29,7 +29,8 @@ endmacro()
 # 设置变量
 # ubuntu renesas
 #set(PLATFORM   ubuntu)
-set(PLATFORM   renesas)
+#set(PLATFORM   renesas)
+#set(PLATFORM   xilinx)
 
 # ---------- 开头部分:指定输出路径 ----------
 # CMake 最低版本号要求
@@ -52,7 +53,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_OUTPUT_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_OUTPUT_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_OUTPUT_DIR}/lib)
 
-# 设置
+# 设置代码分布路径
 set(CODE_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 set(INC_SOURCE_DIR ${PROJECT_SOURCE_DIR}/inc)
 set(LIB_SOURCE_DIR ${PROJECT_SOURCE_DIR}/libs)
@@ -87,7 +88,7 @@ include_directories(${INC_SOURCE_DIR})
 # 递归枚举所有c文件
 file(GLOB_RECURSE CLISTS ${CODE_SOURCE_DIR}/*.c)
 # 递归枚举所有cpp文件
-file(GLOB_RECURSE CPPLISTS ${CODE_SOURCE_DIR}/*.cpp ${TEST_SOURCE_DIR}/*.cpp)
+file(GLOB_RECURSE CPPLISTS ${CODE_SOURCE_DIR}/*.cpp ${TEST_SOURCE_DIR}/*.cpp ${DEMO_SOURCE_DIR}/*.cpp)
 
 # 设定链接库的位置
 link_directories("${LIB_SOURCE_DIR}/so/${PLATFORM}")
@@ -96,12 +97,18 @@ link_directories("${LIB_SOURCE_DIR}/a/${PLATFORM}")
 link_libraries(libpthread.so)
 
 # 指定生成可执行文件
-add_executable(Ratchet ${CPPLISTS} ${CLISTS})
+add_executable(Ratchet ${CPPLISTS} ${CLISTS})						# 编译为应用程序			
+#add_library(Ratchet ${CPPLISTS} ${CLISTS})							# 编译为静态库
+#add_library(Ratchet SHARED ${CPPLISTS} ${CLISTS})					# 编译为动态链接库
+
 # 添加链接库
 #target_link_libraries(Ratchet libflexdebug.so)
 target_link_libraries(Ratchet libmxml.a)
 target_link_libraries(Ratchet libevent.a)
+target_link_libraries(Ratchet libevent_pthreads.a)
 target_link_libraries(Ratchet libzmq.a)
+target_link_libraries(Ratchet liblog4cplus.a)
+target_link_libraries(Ratchet libcppjson.a)
 
 # 目标文件的安装
 #install(TARGETS demo RUNTIME DESTINATION bin)
@@ -123,7 +130,6 @@ message(STATUS "inc path : ${PROJECT_INCLUDE_DIR}")
 
 message(STATUS "lib output path : ${LIBRARY_OUTPUT_PATH}")
 message(STATUS "exe output path : ${EXECUTABLE_OUTPUT_PATH}")
-
 
 message(STATUS "cmake runtime output path : ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 message(STATUS "cmake library output path : ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")

@@ -1,8 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <string>
 
-#include "debug.h"
+#include "common.h"
 #include "parseXml.h"
 
 using namespace std;

@@ -1,10 +1,52 @@
+/******************************************************************************
 
+  Copyright (C), 2017-2019, AVS Team Flex SDC Co., Ltd.
 
+ ******************************************************************************
+  File Name     : parseXml.cpp
+  Version       : Initial Draft
+  Author        : David Xu
+  Created       : 2019/2/17
+  Last Modified :
+  Description   : This Class Parse XML then Get Process Configuration
+  Function List :
+              parseXml.getCommandPath
+              parseXml.getProcess
+              parseXml.getProcessValue
+              parseXml.getReturnValueDescription
+              parseXml.parseXml
+              parseXml.parseXmlFile
+  History       :
+  1.Date        : 2019/2/17
+    Author      : David Xu
+    Modification: Created file
+
+******************************************************************************/
+
+// ----- include file 
 #include	"common.h"
-
-#include	"lib/mxml.h"
-
+#include	"mxml.h"
 #include 	"parseXml.h"
+
+// ----- external variables 
+
+// ----- internal variables 
+
+// ----- external routine prototypes 
+
+// ----- internal routine prototypes 
+
+// ----- project-wide global variables 
+
+// ----- module-wide global variables 
+
+// ----- constants 
+
+// ----- macros 
+
+// ----- routines' implementations 
+
+
 
 using namespace std;
 
@@ -12,6 +54,7 @@ parseXml::parseXml(const char *file)
 {
 	parseXmlFile(file);
 }
+
 
 void parseXml::parseXmlFile(const char *file)
 {

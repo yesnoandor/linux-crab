@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file is a configure doc, please follow the format to expand, every item must have the value and command elements.The commnand element only have one which desribe the command path, if it has the same path with main process
+than use the / instead.The value element has two at least(success,fail),you can add value element ,the 'text' is a function return ,'resut' attribute is the desription for the value. -->
+<root>
+	<item name="socket">
+		<data name="ip" type="STRING">180.168.34.250</data>
+		<data name="port" type="DWORD">8888</data>
+	</item>
+
+	<item name="event_file">
+		<data name="prefix" type="STRING">mlog</data>
+		<data name="suffix" type="STRING">txt</data>
+		<data name="path" type="STRING">/usr/local/bin</data>
+		<data name="timeout" type="DWORD">300</data>
+	</item>
+</root>

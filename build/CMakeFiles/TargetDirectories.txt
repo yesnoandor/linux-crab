@@ -1,3 +1,0 @@
-/home/wenyu/work/diagnostic/linux-crab/build/CMakeFiles/rebuild_cache.dir
-/home/wenyu/work/diagnostic/linux-crab/build/CMakeFiles/Ratchet.dir
-/home/wenyu/work/diagnostic/linux-crab/build/CMakeFiles/edit_cache.dir

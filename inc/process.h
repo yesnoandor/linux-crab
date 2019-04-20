@@ -1,3 +1,21 @@
+/******************************************************************************
+
+  Copyright (C), 2017-2019, AVS Team Flex SDC Co., Ltd.
+
+ ******************************************************************************
+  File Name     : process.h
+  Version       : Initial Draft
+  Author        : David Xu
+  Created       : 2019/2/17
+  Last Modified :
+  Description   : process.cpp header file
+  Function List :
+  History       :
+  1.Date        : 2019/2/17
+    Author      : David Xu
+    Modification: Created file
+
+******************************************************************************/
 
 #ifndef _PROCESS_H_
 #define _PROCESS_H_

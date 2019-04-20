@@ -1,10 +1,65 @@
-#include	"common.h"
+/******************************************************************************
 
+  Copyright (C), 2017-2019, AVS Team Flex SDC Co., Ltd.
+
+ ******************************************************************************
+  File Name     : process.cpp
+  Version       : Initial Draft
+  Author        : David Xu
+  Created       : 2019/2/17
+  Last Modified :
+  Description   : This class treat all of test process
+  Function List :
+              Process.create_process
+              Process.get_process_id
+              Process.get_process_path
+              Process.kill_process
+              Process.kill_process
+              Process.list_process
+              Process.Process
+              Process.remove_process_info
+              Process.remove_process_info
+              Process.start_process
+              Process.start_process
+              Process.start_process_info
+              Process.stop_process
+              Process.stop_process
+              Process.stop_process_info
+              Process.update_process
+              Process.~Process
+  History       :
+  1.Date        : 2019/2/17
+    Author      : David Xu
+    Modification: Created file
+
+******************************************************************************/
+
+// ----- include file 
+#include	"common.h"
 #include	"process.h"
 
+// ----- external variables 
+
+// ----- internal variables 
+
+// ----- external routine prototypes 
+
+// ----- internal routine prototypes 
+
+// ----- project-wide global variables 
+
+// ----- module-wide global variables 
+
+// ----- constants 
+
+// ----- macros 
+
+// ----- routines' implementations 
+
+#if 0
 int Process::get_process_id(string name)
 {
-#if 0
+
 	DIR *pdir = NULL;  
  struct dirent *pde = NULL;  
    
@@ -46,11 +101,16 @@ int Process::get_process_id(string name)
  }  
    
  closedir(pdir);  
-#endif 
+
 
 	return 0;  
 }
+#endif 
 
+int Process::get_process_id(string name)
+{
+	return 0;
+}
 
 string Process::get_process_path(int pid)
 {

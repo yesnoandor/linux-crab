@@ -36,6 +36,8 @@ void process_test(void)
 		
 	}while(1);
 
+	delete p;
+	
 	sleep(2);
 	
 	DbgFuncExit();

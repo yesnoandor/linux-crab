@@ -1,19 +1,4 @@
-#include	<stdio.h>
-#include	<stdlib.h>
-#include	<fcntl.h>
-#include	<unistd.h>
-#include	<string.h>
-#include	<errno.h>
-
-#include	<sys/types.h>
-#include	<sys/stat.h>
-#include	<sys/ioctl.h>
-
-#include 	<linux/types.h>
-#include	<linux/i2c.h>
-#include	<linux/i2c-dev.h>
-
-#include	"debug.h"
+#include	"common.h"
 
 #define		SYSFS_DEVICE_NAME		"/sys/bus/i2c/devices/7-0054/eeprom"
 #define		DEVFS_DEVICE_NAME		"/dev/i2c-7"

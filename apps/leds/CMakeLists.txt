@@ -1,5 +1,5 @@
 # 设置app名字
-set(APP_NAME "at24cxx_diags")
+set(APP_NAME "leds_diags")
 
 # CMake 最低版本号要求
 cmake_minimum_required (VERSION 2.8)
@@ -41,10 +41,9 @@ target_link_libraries(${APP_NAME} libmxml.a)
 
 
 # ---------- 附加部分:输出调试信息 ----------
+message(STATUS "App Name:  ${APP_NAME}")
 message(STATUS "TOP DIR:  ${TOP_DIR}")
 
 message(STATUS "src code path : ${CODE_SOURCE_DIR}")
 message(STATUS "src inc path : ${INC_SOURCE_DIR}")
 message(STATUS "src lib path : ${LIB_SOURCE_DIR}")
-
-

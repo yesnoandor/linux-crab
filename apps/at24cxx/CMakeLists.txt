@@ -38,9 +38,11 @@ add_executable(${APP_NAME} ${DIR_SRCS})
 
 # 添加链接库
 target_link_libraries(${APP_NAME} libmxml.a)
+target_link_libraries(${APP_NAME} libnode.a)
 
 
 # ---------- 附加部分:输出调试信息 ----------
+message(STATUS "App Name:  ${APP_NAME}")
 message(STATUS "TOP DIR:  ${TOP_DIR}")
 
 message(STATUS "src code path : ${CODE_SOURCE_DIR}")

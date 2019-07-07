@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+	<module name="sysmon">
+		<value name="node_base">/sys/bus/iio/devices/iio:device0</value>
+		
+		<item channel="0" type="temp">
+			<value name="offset">in_temp0_ps_temp_offset</value>
+			<value name="raw">in_temp0_ps_temp_raw</value>
+			<value name="scale">in_temp0_ps_temp_scale</value>
+			<value name="max">2224</value>
+			<value name="min">2224</value>
+		</item>
+
+		<item channel="1" type="temp">
+			<value name="offset">in_temp1_remote_temp_offset</value>
+			<value name="raw">in_temp1_remote_temp_raw</value>
+			<value name="scale">in_temp1_remote_temp_scale</value>
+			<value name="max">2224</value>
+			<value name="min">2224</value>
+		</item>
+
+		<item channel="2" type="temp">
+			<value name="offset">in_temp2_pl_temp_offset</value>
+			<value name="raw">in_temp2_pl_temp_raw</value>
+			<value name="scale">in_temp2_pl_temp_scale</value>
+			<value name="max">2224</value>
+			<value name="min">2224</value>
+		</item>
+		
+		<item channel="0" type="voltage">
+			<value name="raw">in_voltage0_vcc_pspll0_raw</value>
+			<value name="scale">in_voltage0_vcc_pspll0_scale</value>
+			<value name="max">2224</value>
+			<value name="min">2224</value>
+		</item>
+
+		<item channel="1" type="voltage">
+			<value name="raw">in_voltage1_vcc_psbatt_raw</value>
+			<value name="scale">in_voltage1_vcc_psbatt_raw</value>
+			<value name="max">2224</value>
+			<value name="min">2224</value>
+		</item>
+
+    </module>
+
+	<!--
+		<item name="ret">
+			<value result="ERROR_NO">0</value>
+			<value result="ERROR_OPEN">-1</value>
+        		<value result="ERROR_WRITE">-2</value>
+        		<value result="ERROR_READ">-3</value>
+        		<value result="ERROR_COMPARE">-4</value>
+        		<value result="ERROR_OTHERS">-100</value>
+        </item>
+	-->
+
+</root>

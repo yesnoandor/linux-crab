@@ -1,96 +1,89 @@
-#include	"common.h"
+#include		"common.h"
+#include		"at24cxx_parse.h"
 
-#define		SYSFS_DEVICE_NAME		"/sys/bus/i2c/devices/7-0054/eeprom"
-#define		DEVFS_DEVICE_NAME		"/dev/i2c-7"
+#define		AT24CXX_XML		"./at24cxx_diags.xml"
 
-#define		TEST_STRING				"EEPROM Test:01234567890!"
-#define		TEST_OFFSET_ADDR		0x80
-
-enum{
-	ERROR_NO = 0,
-	ERROR_OPEN = -1,
-	ERROR_WRITE = -2,
-	ERROR_READ = -3,
-	ERROR_COMPARE = -4,
-	ERROR_OTHERS = -100
-};
-
-int sysfs_eeprom_test()
+int sysfs_eeprom_test(p_sysfs_params_t params)
 {
 	int fd, size, len;
 	char buf[50]= {0};
-	
+
 	DbgFuncEntry();
 
-	len = sizeof(TEST_STRING);
+	len = strlen(params->str.c_str());
+	DbgPrintf("len = %d\r\n",len);
 
-	// 
-    fd= open(SYSFS_DEVICE_NAME,O_RDWR);
-    if(fd< 0)
-    {
-        DbgError("can't open device!(%s)\r\n",SYSFS_DEVICE_NAME);
-        return ERROR_OPEN;
-    }
+	//
+	fd = open(params->node.c_str(),O_RDWR);
+	if(fd < 0)
+	{
+		DbgError("can't open device!(%s)(errno = %s)\r\n",params->node.c_str(),strerror(errno));
+		return errno;
+	}
 
 	// 写操作
-	lseek(fd,TEST_OFFSET_ADDR,SEEK_SET);
-	size = write(fd,TEST_STRING,len);
+	lseek(fd,params->offset,SEEK_SET);
+	size = write(fd,params->str.c_str(),len);
 	if(size != len)
 	{
-        DbgError("write error!(size = %d,len = %d)\r\n",size,len);
-        return ERROR_WRITE;
-    }
-    DbgGood("write ok!\r\n");
+		DbgError("write error!(size = %d,len = %d)(errno = %s)\r\n",size,len,strerror(errno));
+		return errno;
+	}
+	DbgGood("write ok!\r\n");
 
 	// 清缓冲
-    memset(buf,0x00,sizeof(buf));
+	memset(buf,0x00,sizeof(buf));
 
 	// 读操作
-    lseek(fd,TEST_OFFSET_ADDR, SEEK_SET);
-    size=read(fd,buf,len);
-    if(size != len)
-    {
-        DbgError("read error!(size = %d,len = %d)\r\n",size,len);
-        return ERROR_READ;
-    }
-    DbgGood("read ok!\r\n");
+	lseek(fd,params->offset,SEEK_SET);
+	size=read(fd,buf,len);
+	if(size != len)
+	{
+		DbgError("read error!(size = %d,len = %d)(errno = %s)\r\n",size,len,strerror(errno));
+		return errno;
+	}
+	DbgGood("read ok!\r\n");
 
 	// 比较验证
-	if(strcmp(buf,TEST_STRING) != 0)
+	DbgGood("%s\r\n",params->str.c_str());
+	DbgGood("%s\r\n",buf);
+	
+	if(strcmp(buf,params->str.c_str()) != 0)
 	{
 		DbgError("compare error!(%s)\r\n",buf);
-        return ERROR_COMPARE;
+		return ERROR_MODULE_EERPOM;
 	}
 	DbgGood("compare ok!\r\n");
 
-	//
-    close(fd);
+	// 
+	close(fd);
 
 	DbgFuncExit();
-	
-    return ERROR_NO;
+
+	return ERROR_NO;
 }
 
 
-int devfs_eeprom_test()
+int devfs_eeprom_test(p_devfs_params_t params)
 {
 	int fd,ret;
 	struct i2c_rdwr_ioctl_data e2prom_data;
-	unsigned char slave_addr,reg_addr,reg_data;
+	unsigned char temp;
+	//unsigned char reg_addr,reg_data;
 
 	DbgFuncEntry();
 
 	// 打开eeprom  设备文件结点
-	fd=open(DEVFS_DEVICE_NAME,O_RDWR);
-	if(fd<0)
+	fd = open(params->node.c_str(),O_RDWR);
+	if(fd < 0)
 	{
-		DbgError("can't open device!(%s)\r\n",DEVFS_DEVICE_NAME);
-		return ERROR_OPEN;
+		DbgError("can't open device!(%s)strerror(errno)\r\n",params->node.c_str(),strerror(errno));
+		return errno;
 	}	
 
-	slave_addr = 0x54;
-	reg_addr = TEST_OFFSET_ADDR;
-	reg_data = 0x5a;
+	//slave_addr = 0x54;
+	//reg_addr = TEST_OFFSET_ADDR;
+	//reg_data = 0x5a;
 	
 	// nmsgs决定了有多少start信号
 	// 一个msgs对应一个start信号
@@ -100,12 +93,12 @@ int devfs_eeprom_test()
 	e2prom_data.msgs=(struct i2c_msg*)malloc(e2prom_data.nmsgs*sizeof(struct i2c_msg));//分配空间
 	if(!e2prom_data.msgs)
 	{
-		DbgError("malloc memory not enough!\r\n");
-		return ERROR_OTHERS;
+		DbgError("malloc memory not enough!strerror(errno)\r\n",strerror(errno));
+		return errno;
 	}
 
 	ioctl(fd,I2C_TIMEOUT,1);	//超时时间
-	ioctl(fd,I2C_RETRIES,2);	//重复次数
+	ioctl(fd,I2C_RETRIES,2);		//重复次数
 
 	/*
 	* write eeprom
@@ -116,16 +109,16 @@ int devfs_eeprom_test()
 	*/
 	e2prom_data.nmsgs = 1;
 	(e2prom_data.msgs[0]).len = 2;
-	(e2prom_data.msgs[0]).addr = slave_addr;
+	(e2prom_data.msgs[0]).addr = params->slaveaddr;
 	(e2prom_data.msgs[0]).flags = 0; // write flag
 	(e2prom_data.msgs[0]).buf = (unsigned char*)malloc(2);
-	(e2prom_data.msgs[0]).buf[0] = reg_addr;
-	(e2prom_data.msgs[0]).buf[1] = reg_data;
+	(e2prom_data.msgs[0]).buf[0] = params->offset;
+	(e2prom_data.msgs[0]).buf[1] = params->value;
 	ret = ioctl(fd,I2C_RDWR,(unsigned long)&e2prom_data);
 	if(ret<0)
 	{
 		DbgError("write ioctl error!(errno = %s)\r\n",strerror(errno));
-		return ERROR_WRITE;
+		return errno;
 	}
 
 	sleep(1);
@@ -138,48 +131,65 @@ int devfs_eeprom_test()
 	*/
 	e2prom_data.nmsgs=2;
 	(e2prom_data.msgs[0]).len = 1;
-	(e2prom_data.msgs[0]).addr = slave_addr;
+	(e2prom_data.msgs[0]).addr = params->slaveaddr;
 	(e2prom_data.msgs[0]).flags = 0; // write flag
-	(e2prom_data.msgs[0]).buf[0] = reg_addr;
+	(e2prom_data.msgs[0]).buf[0] = params->offset;
 
 	(e2prom_data.msgs[1]).len = 1;
-	(e2prom_data.msgs[1]).addr = slave_addr;
+	(e2prom_data.msgs[1]).addr = params->slaveaddr;
 	(e2prom_data.msgs[1]).flags = I2C_M_RD;	// read flag
-	(e2prom_data.msgs[1]).buf = (unsigned char*)malloc(1);	//存放返回值的地址
+	(e2prom_data.msgs[1]).buf = &temp;	//存放返回值的地址
 	(e2prom_data.msgs[1]).buf[0] = 0;
 	ret = ioctl(fd,I2C_RDWR,(unsigned long)&e2prom_data);
 	if(ret < 0)
 	{
 		DbgError("read ioctl error!(errno = %s)\r\n",strerror(errno));
-		return ERROR_READ;
+		return errno;
 	}
 
 	// 比较验证
-	if((e2prom_data.msgs[1]).buf[0] != reg_data)
+	if((e2prom_data.msgs[1]).buf[0] != params->value)
 	{
-		DbgError("compare error!(%d : %d)\r\n",(e2prom_data.msgs[1]).buf[0],reg_data);
-        return ERROR_COMPARE;
+		DbgError("compare error!(0x%x : 0x%x)\r\n",(e2prom_data.msgs[1]).buf[0],params->value);
+		return ERROR_MODULE_EERPOM;
 	}
 	DbgGood("compare ok!\r\n");
 
 	close(fd);
 
+	free((e2prom_data.msgs[0]).buf);
+	free(e2prom_data.msgs);
+	
 	return ERROR_NO;
 }
 
 int main(int argc,char* argv[])
 {
 	int ret;
+	p_sysfs_params_t sysfs_params;
+	p_devfs_params_t devfs_params;
 
-	// parse xml
+	// at24xcc parse xml
+	at24cxx_parse_xml(AT24CXX_XML);
+	at24cxx_info_printf();
 
-	ret = sysfs_eeprom_test();
-	DbgPrintf("sysfs eeprom test result = %d\r\n",ret);
+	sysfs_params = get_at24cxx_sysfs_params();
+	devfs_params = get_at24cxx_devfs_params();
 
-	sleep(1);
+	if(sysfs_params->enable)
+	{
+		ret = sysfs_eeprom_test(sysfs_params);
+		DbgPrintf("sysfs eeprom test result = %d\r\n",ret);
+	}
 	
-	ret = devfs_eeprom_test();
-	DbgPrintf("devfs i2c test result = %d\r\n",ret);
+	sleep(1);
+
+	if(devfs_params->enable)
+	{
+		ret = devfs_eeprom_test(devfs_params);
+		DbgPrintf("devfs i2c test result = %d\r\n",ret);
+	}
+	
 	return ret;
 }
 

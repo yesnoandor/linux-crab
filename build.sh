@@ -11,6 +11,10 @@ Examples:
 	$0 ubuntu 2>&1 | tee build.log
 	$0 renesas 2>&1 | tee build.log
 	$0 xilinx 2>&1 | tee build.log
+	$0 apps
+	$0 uapps
+	$0 rapps
+	$0 xapps
 	$0 all
 	$0 clean
 "
@@ -197,6 +201,20 @@ function build_parse()
 			;;
 		xilinx)
 			build_xilinx
+			build_xilinx_apps
+			;;
+		apps)
+			build_ubuntu_apps
+			build_renesas_apps
+			build_xilinx_apps
+			;;
+		uapps)
+			build_ubuntu_apps
+			;;
+		rapps)
+			build_renesas_apps
+			;;
+		xapps)
 			build_xilinx_apps
 			;;
 		all)

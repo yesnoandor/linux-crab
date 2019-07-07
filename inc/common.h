@@ -48,6 +48,11 @@
 
 // User
 #include	"misc.h"
+#include	"node.h"
+#include	"error.h"
 #include	"debug.h"
+
+#define	PROCESS_CONFIG_FILE_PATH	"./configure.xml"
+#define	PROCESS_SETTING_FILE_PATH	"./setting.xml"
 
 #endif

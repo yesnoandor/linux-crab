@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+	<item name="ads7828">
+		<value name="node_base">/sys/class/hwmon/hwmon18</value>
+		
+		<item channel="0" enable="true">
+			<value name="node">in0_input</value>
+			<value name="max">2224</value>
+			<value name="min">2224</value>
+		</item>
+		
+		<!--
+		<item channel="1" enable="false">
+			<value name="node">in0_input</value>
+			<value name="max">2224</value>
+			<value name="min">2224</value>
+		</item>
+		-->
+		
+	
+		<item channel="2" enable="false">
+		</item>
+	
+		<item channel="3" enable="false">
+		</item>
+		
+		<item channel="4" enable="false">
+		</item>
+	
+		<item channel="5" enable="false">
+		</item>
+
+		
+		<item channel="6" enable="false">
+		</item>
+	
+		<item channel="7" enable="false">
+		</item>
+    	</item>
+
+	<!--
+		<item name="ret">
+			<value result="ERROR_NO">0</value>
+			<value result="ERROR_OPEN">-1</value>
+        		<value result="ERROR_WRITE">-2</value>
+        		<value result="ERROR_READ">-3</value>
+        		<value result="ERROR_COMPARE">-4</value>
+        		<value result="ERROR_OTHERS">-100</value>
+        	</item>
+	-->
+
+</root>

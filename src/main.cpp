@@ -10,11 +10,11 @@
 #include	"test/log4cplus_test.h"
 
 #include	"demo/AresDemo.h"
-
+#include	"demo/ZeusDemo.h"
 
 int main(int argc,char* argv[])
 {
-	log4cplus_test();
+	//log4cplus_test();
 	
 	//process_test();
 	//parseXml_test();
@@ -27,6 +27,6 @@ int main(int argc,char* argv[])
 	
 	//AresDemo();
 
-
+	ZeusDemo();
 	
 }

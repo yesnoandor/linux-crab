@@ -119,11 +119,16 @@ vector<string> parseAresEvent::getAresEvent(int id)
 }
 
 
-void parseAresEvent::onCallback()
+void parseAresEvent::onCallback(char *buf,int len)
 {
 	DbgFuncEntry();
 
 	DbgGood("onCallback!!!\r\n");
+
+	DbgPrintf("len = %d\r\n",len);
+
+	for(int i=0;i<len;i++)
+		DbgPrintf("buf[%d] = 0x%x\r\n",i,buf[i]);
 
 	DbgFuncExit();
 }
@@ -136,7 +141,6 @@ void parseAresEvent::start(const char *file)
 
 	DbgFuncEntry();
 
-	
 	if(in)
 	{
 		while (getline (in, line))
@@ -144,22 +148,22 @@ void parseAresEvent::start(const char *file)
 			size_t n = line.find_last_not_of("\r\n\t" );
 			if( n != string::npos )
 			{
-    			line.erase( n + 1 , line.size() - n );
+				line.erase( n + 1 , line.size() - n );
 			}
 
 			json.Clear();
 			parseLine(json,line);
 			oJson.push_back(json);
-        }  
-    }  
-    else
-    {  
-        cout <<"no such file" << endl;  
-    }
+		}
+	}
+	else
+	{
+		cout <<"no such file" << endl;
+	}
 
 	in.close();
-	
-    DbgFuncExit();
+
+	DbgFuncExit();
 }
 
 parseAresEvent::parseAresEvent(const char *file)

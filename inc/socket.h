@@ -19,7 +19,7 @@ private:
 	int timeout;	// 
 	int threhold;
 
-	std::function<void()> mCallback;
+	std::function<void(char *,int)> mCallback;
 
 private:
 	void taskHandle();
@@ -33,9 +33,10 @@ public:
 	~socketTcp();	
 
 	void start(string ip,short port);
+	void stop(void);
 	void send(unsigned char *buff,int len);
 
-	void registerCallback(const std::function<void()> & callback);
+	void registerCallback(const std::function<void(char *,int)> & callback);
 };
 
 #endif

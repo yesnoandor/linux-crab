@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <item name="sysfs" enable="true">
+        <value name="node">/sys/bus/i2c/devices/7-0054/eeprom</value>
+        <value name="offset">0x80</value>
+        <value name="string">EEPROM:Test:01234567890!</value>
+    </item>
+
+    <item name="devfs" enable="true">
+        <value name="node">/dev/i2c-7</value>
+        <value name="slaveaddr">0x54</value>
+        <value name="offset">0x80</value>
+        <value name="value">0x5a</value>
+    </item>
+
+	<!--
+    <item name="ret">
+        <value result="ERROR_NO">0</value>
+        <value result="ERROR_OPEN">-1</value>
+        <value result="ERROR_WRITE">-2</value>
+        <value result="ERROR_READ">-3</value>
+        <value result="ERROR_COMPARE">-4</value>
+        <value result="ERROR_OTHERS">-100</value>
+    </item>
+	-->
+
+</root>

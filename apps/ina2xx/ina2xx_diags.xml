@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+	<module name="ina2xx">
+		<value name="node_base">/sys/class/hwmon/hwmon0</value>
+		
+		<item index="0">
+			<value name="node">in0_input</value>
+			<value name="max">10</value>
+			<value name="min">2</value>
+		</item>
+		
+		<item index="1">
+			<value name="node">in1_input</value>
+			<value name="max">900</value>
+			<value name="min">800</value>
+		</item>
+
+		<item index="2">
+			<value name="node">curr1_input</value>
+			<value name="max">1300</value>
+			<value name="min">1250</value>
+		</item>
+	</module>
+	
+	<!--
+		<item name="ret">
+			<value result="ERROR_NO">0</value>
+			<value result="ERROR_OPEN">-1</value>
+        		<value result="ERROR_WRITE">-2</value>
+        		<value result="ERROR_READ">-3</value>
+        		<value result="ERROR_COMPARE">-4</value>
+        		<value result="ERROR_OTHERS">-100</value>
+        	</item>
+	-->
+
+</root>

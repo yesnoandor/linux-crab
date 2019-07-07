@@ -223,6 +223,28 @@ void Process::remove_process_info(string path)
 	DbgFuncExit();
 }
 
+void Process::exit_process_info(int pid,int value)
+{
+	process_info_vector::iterator it;
+	//process_info_t info;
+	
+	DbgFuncEntry();
+
+	for (it = process_info.begin();it<process_info.end();++it)
+	{
+		//info = *it;
+		if(pid == it->pid)
+		{
+			DbgPrintf("exit pid = %d\r\n",pid);
+			it->status = EXIT_STATE;
+			it->exit_value = value;
+			break;
+		}
+	}
+
+	DbgFuncExit();
+}
+
 void Process::create_process(string path)
 {	
 	DbgFuncEntry();
@@ -246,6 +268,7 @@ void Process::create_process(string path)
 		info.pid = pid;
 		info.status = RUNNING_STATE; 
 		info.level = DEFAULT_PROCESS_LEVEL;
+		info.exit_value = 0;
 		process_info.push_back(info);
 	}
 	else
@@ -359,7 +382,7 @@ int Process::update_process(int& pid,int& exit_value)
 			status = SELF_EXIT;
 			exit_value = WEXITSTATUS(child_status);
 
-			remove_process_info(pid);
+			exit_process_info(pid,exit_value);
 			DbgPrintf("process %d exit, status=%d \r\n",pid,exit_value);
 		}
 		else if (WIFSIGNALED(child_status))
@@ -418,9 +441,109 @@ void Process::list_process()
 		cout << "path = " << info.path << endl;
 		cout << "status = " << info.status << endl;
 		cout << "level = " << info.level << endl;
+		cout << "exit_value = " << info.exit_value << endl;
 	} 
 
 	DbgFuncExit();
+}
+
+
+int Process::get_process_count()
+{
+	return process_info.size();
+}
+
+
+int Process::get_running_process_count()
+{
+	int counts = 0;
+	process_info_vector::iterator it;
+	process_info_t info;
+	
+	DbgFuncEntry();
+
+	for (it = process_info.begin();it<process_info.end();++it)
+	{
+		info = *it;
+		
+		if(info.status == RUNNING_STATE)
+		{
+			counts++;
+		}
+	}
+
+	DbgFuncExit();
+
+	return counts;
+}
+
+
+int Process::get_stop_process_count()
+{
+	int counts = 0;
+	process_info_vector::iterator it;
+	process_info_t info;
+	
+	DbgFuncEntry();
+
+	for (it = process_info.begin();it<process_info.end();++it)
+	{
+		info = *it;
+		
+		if(info.status == STOP_STATE)
+		{
+			counts++;
+		}
+	}
+
+	DbgFuncExit();
+
+	return counts;
+}
+
+int Process::get_exit_process_count()
+{
+	int counts = 0;
+	process_info_vector::iterator it;
+	process_info_t info;
+	
+	DbgFuncEntry();
+
+	for (it = process_info.begin();it<process_info.end();++it)
+	{
+		info = *it;
+		
+		if(info.status == EXIT_STATE)
+		{
+			counts++;
+		}
+	}
+
+	DbgFuncExit();
+
+	return counts;
+}
+
+int Process::get_exit_value(string name)
+{
+	process_info_vector::iterator it;
+	process_info_t info;
+	int ret = -1;
+	
+	DbgFuncEntry();
+
+	for (it = process_info.begin();it<process_info.end();++it)
+	{
+		info = *it;
+		if(name == info.name)
+		{
+			ret = info.exit_value;
+		}
+	}
+
+	DbgFuncExit();
+
+	return ret;
 }
 
 Process::Process()

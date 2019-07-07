@@ -1,7 +1,6 @@
 #include "stdlib.h"
 #include "generator.h"
 
-
 int main(int argc, char *argv[])
 {
     generator gen;

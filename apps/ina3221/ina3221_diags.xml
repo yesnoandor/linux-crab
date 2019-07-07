@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<item name="ina3221">
+		<value name="node_base">/sys/class/hwmon/hwmon18</value>
+
+		<item channel="0" enable="true">
+			<value name="node">in1_input</value>
+			<value name="max">3960</value>
+			<value name="min">2640</value>
+			
+			<value name="node">curr1_input</value>
+			<value name="max">361</value>
+			<value name="min">240</value>
+			
+			<value name="node">in4_input</value>
+			<value name="max">36192</value>
+			<value name="min">24128</value>
+		</item>
+		
+		<item channel="1" enable="true">
+			<value name="node">in2_input</value>
+			<value name="max">3960</value>
+			<value name="min">2640</value>
+			
+			<value name="node">curr2_input</value>
+			<value name="max">36</value>
+			<value name="min">24</value>
+
+			<value name="node">in5_input</value>
+			<value name="max">3600</value>
+			<value name="min">2400</value>
+		</item>
+
+		<item channel="2" enable="true">
+			<value name="node">in3_input</value>
+			<value name="max">3960</value>
+			<value name="min">2640</value>
+			<value name="node">curr3_input</value>
+			<value name="max">352</value>
+			<value name="min">235</value>
+			<value name="node">in6_input</value>
+			<value name="max">35328</value>
+			<value name="min">23552</value>
+		</item>
+	</item>
+
+
+	<!--
+	<item name="ret">
+		<value result="ERROR_NO">0</value>
+		<value result="ERROR_OPEN">-1</value>
+		<value result="ERROR_WRITE">-2</value>
+		<value result="ERROR_READ">-3</value>
+		<value result="ERROR_VALUE">-4</value>
+		<value result="ERROR_OTHERS">-100</value>
+	</item>
+	-->
+<root>
+
+
+
+

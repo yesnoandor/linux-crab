@@ -29,7 +29,7 @@ public:
 	vector<string> getNewAresEvent();
 
 	void start(const char *file);
-	void onCallback();
+	void onCallback(char *buf,int len);
 };
 
 #endif // _PARSE_ARES_EVENT_H

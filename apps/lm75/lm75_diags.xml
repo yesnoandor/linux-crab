@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+	<module name="lm75">
+		<value name="node_base">/sys/class/hwmon/hwmon19</value>
+
+		<value name="node">temp1_input</value>
+		<value name="max">2224</value>
+		<value name="min">2224</value>
+	</module>
+	
+	<!--
+		<item name="ret">
+			<value result="ERROR_NO">0</value>
+			<value result="ERROR_OPEN">-1</value>
+        		<value result="ERROR_WRITE">-2</value>
+        		<value result="ERROR_READ">-3</value>
+        		<value result="ERROR_COMPARE">-4</value>
+        		<value result="ERROR_OTHERS">-100</value>
+        	</item>
+	-->
+
+</root>

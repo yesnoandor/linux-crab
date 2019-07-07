@@ -3,8 +3,8 @@
 than use the / instead.The value element has two at least(success,fail),you can add value element ,the 'text' is a function return ,'resut' attribute is the desription for the value. -->
 <root>
 	<item name="socket">
-		<data name="ip" type="STRING">180.168.34.250</data>
-		<data name="port" type="DWORD">8888</data>
+		<data name="ip" type="STRING">192.168.1.118</data>
+		<data name="port" type="DWORD">9988</data>
 	</item>
 
 	<item name="event_file">

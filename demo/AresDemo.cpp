@@ -128,19 +128,19 @@ static void signal_treat(void)
 	//parseAresEvent parse(file);
 	m_parse.start(m_file.c_str());
 
-    vector<string> event = m_parse.getNewAresEvent();
+	vector<string> event = m_parse.getNewAresEvent();
 
 	cout << "size =" << event.size() << endl;
 	
-	m_socket.registerCallback(std::bind(&parseAresEvent::onCallback,m_parse));
-    for (auto it = event.begin(); it != event.end(); ++it)
-    {
-    	eventJson = *it;
-       	cout << "item : " << eventJson << endl;
-       	m_socket.send((unsigned char *)eventJson.c_str(),eventJson.length() + 1);
-    }
+	m_socket.registerCallback(std::bind(&parseAresEvent::onCallback,m_parse,std::placeholders::_1, std::placeholders::_2));
+	for (auto it = event.begin(); it != event.end(); ++it)
+	{
+		eventJson = *it;
+		cout << "item : " << eventJson << endl;
+		m_socket.send((unsigned char *)eventJson.c_str(),eventJson.length() + 1);
+	}
 
-    DbgFuncExit();
+	DbgFuncExit();
 }
 
 static void signal_user1_treat(void)

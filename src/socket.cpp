@@ -160,7 +160,7 @@ void socketTcp::aux_server_read_cb(struct bufferevent* bev, void* arg)
 	evbuffer_drain(input,offset);
 	DbgPrintf("msg = %s\r\n",msg.data());
 
-	socket->mCallback();
+	socket->mCallback(msg.data(),msg.size());
 	
 	//socket_mngr_list[index].timeout = 0;
 
@@ -231,6 +231,14 @@ void socketTcp::start(string ip,short port)
 	DbgFuncExit();
 }
 
+void socketTcp::stop(void)
+{
+	DbgFuncEntry();
+	
+	taskThread.detach();
+	
+	DbgFuncExit();
+}
 
 void socketTcp::taskHandle()
 {
@@ -307,7 +315,7 @@ void socketTcp::taskHandle()
 	DbgFuncExit();
 }
 
-void socketTcp::registerCallback(const std::function<void()> & callback)
+void socketTcp::registerCallback(const std::function<void(char *,int)> & callback)
 {
 	mCallback = callback;
 }

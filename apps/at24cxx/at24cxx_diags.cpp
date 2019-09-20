@@ -8,10 +8,10 @@ int sysfs_eeprom_test(p_sysfs_params_t params)
 	int fd, size, len;
 	char buf[50]= {0};
 
-	DbgFuncEntry();
+	//DbgFuncEntry();
 
 	len = strlen(params->str.c_str());
-	DbgPrintf("len = %d\r\n",len);
+	//DbgPrintf("len = %d\r\n",len);
 
 	//
 	fd = open(params->node.c_str(),O_RDWR);
@@ -29,7 +29,7 @@ int sysfs_eeprom_test(p_sysfs_params_t params)
 		DbgError("write error!(size = %d,len = %d)(errno = %s)\r\n",size,len,strerror(errno));
 		return errno;
 	}
-	DbgGood("write ok!\r\n");
+	//DbgGood("write ok!\r\n");
 
 	// 清缓冲
 	memset(buf,0x00,sizeof(buf));
@@ -42,23 +42,23 @@ int sysfs_eeprom_test(p_sysfs_params_t params)
 		DbgError("read error!(size = %d,len = %d)(errno = %s)\r\n",size,len,strerror(errno));
 		return errno;
 	}
-	DbgGood("read ok!\r\n");
+	//DbgGood("read ok!\r\n");
 
 	// 比较验证
-	DbgGood("%s\r\n",params->str.c_str());
-	DbgGood("%s\r\n",buf);
+	//DbgGood("%s\r\n",params->str.c_str());
+	//DbgGood("%s\r\n",buf);
 	
 	if(strcmp(buf,params->str.c_str()) != 0)
 	{
 		DbgError("compare error!(%s)\r\n",buf);
-		return ERROR_MODULE_EERPOM;
+		return -ERROR_MODULE_EERPOM;
 	}
-	DbgGood("compare ok!\r\n");
+	//DbgGood("compare ok!\r\n");
 
 	// 
 	close(fd);
 
-	DbgFuncExit();
+	//DbgFuncExit();
 
 	return ERROR_NO;
 }
@@ -71,7 +71,7 @@ int devfs_eeprom_test(p_devfs_params_t params)
 	unsigned char temp;
 	//unsigned char reg_addr,reg_data;
 
-	DbgFuncEntry();
+	//DbgFuncEntry();
 
 	// 打开eeprom  设备文件结点
 	fd = open(params->node.c_str(),O_RDWR);
@@ -151,14 +151,16 @@ int devfs_eeprom_test(p_devfs_params_t params)
 	if((e2prom_data.msgs[1]).buf[0] != params->value)
 	{
 		DbgError("compare error!(0x%x : 0x%x)\r\n",(e2prom_data.msgs[1]).buf[0],params->value);
-		return ERROR_MODULE_EERPOM;
+		return -ERROR_MODULE_EERPOM;
 	}
-	DbgGood("compare ok!\r\n");
+	//DbgGood("compare ok!\r\n");
 
 	close(fd);
 
 	free((e2prom_data.msgs[0]).buf);
 	free(e2prom_data.msgs);
+
+	DbgFuncExit();
 	
 	return ERROR_NO;
 }
@@ -171,7 +173,7 @@ int main(int argc,char* argv[])
 
 	// at24xcc parse xml
 	at24cxx_parse_xml(AT24CXX_XML);
-	at24cxx_info_printf();
+	//at24cxx_info_printf();
 
 	sysfs_params = get_at24cxx_sysfs_params();
 	devfs_params = get_at24cxx_devfs_params();
@@ -179,7 +181,27 @@ int main(int argc,char* argv[])
 	if(sysfs_params->enable)
 	{
 		ret = sysfs_eeprom_test(sysfs_params);
-		DbgPrintf("sysfs eeprom test result = %d\r\n",ret);
+		//DbgPrintf("sysfs eeprom test result = %d\r\n",ret);
+		if(!ret)
+		{
+			DbgGood("\r\n\r\n");
+			DbgGood("=========================\r\n");
+			DbgGood("=========================\r\n");
+			DbgGood("sysfs eeprom test ok!!!\r\n");
+			DbgGood("=========================\r\n");
+			DbgGood("=========================\r\n");
+			DbgGood("\r\n\r\n");
+		}
+		else
+		{
+			DbgError("\r\n\r\n");
+			DbgError("=========================\r\n");
+			DbgError("=========================\r\n");
+			DbgError("sysfs eeprom test fail!!!\r\n");
+			DbgError("=========================\r\n");
+			DbgError("=========================\r\n");
+			DbgError("\r\n\r\n");
+		}
 	}
 	
 	sleep(1);

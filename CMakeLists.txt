@@ -94,7 +94,7 @@ file(GLOB_RECURSE CPPLISTS ${CODE_SOURCE_DIR}/*.cpp ${TEST_SOURCE_DIR}/*.cpp ${D
 link_directories("${LIB_SOURCE_DIR}/so/${PLATFORM}")
 link_directories("${LIB_SOURCE_DIR}/a/${PLATFORM}")
 
-link_libraries(libpthread.so)
+#link_libraries(libpthread.so)
 
 # 指定生成可执行文件
 add_executable(Ratchet ${CPPLISTS} ${CLISTS})						# 编译为应用程序			
@@ -109,6 +109,7 @@ target_link_libraries(Ratchet libevent_pthreads.a)
 target_link_libraries(Ratchet libzmq.a)
 target_link_libraries(Ratchet liblog4cplus.a)
 target_link_libraries(Ratchet libcppjson.a)
+target_link_libraries(Ratchet libpthread.so)
 
 # 目标文件的安装
 #install(TARGETS demo RUNTIME DESTINATION bin)

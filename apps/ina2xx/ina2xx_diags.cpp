@@ -16,7 +16,7 @@ int sysfs_ina2xx_test()
 
 	params = get_ina2xx_params();
 
-	for(i=0;i<3;i++)
+	for(i=0;i<INA2XX_MAX_NODE;i++)
 	{
 		node = params->node_base + "/" + params->node[i].node_name;
 		max = params->node[i].max_value;
@@ -35,8 +35,9 @@ int sysfs_ina2xx_test()
 
 		if((value > max) || (value <  min))
 		{
-			ret = ERROR_MODULE_INA2xx;
+			ret = -ERROR_MODULE_INA2xx;
 			DbgError("channel %d adc sample error!\r\n");	
+			break;
 		}
 
 		DbgGood("read ok!\r\n");

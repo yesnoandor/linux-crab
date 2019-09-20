@@ -193,7 +193,7 @@ function build_parse()
 	case $1 in
 		ubuntu)
 			build_ubuntu
-			build_ubuntu_apps
+			#build_ubuntu_apps
 			;;
 		renesas)
 			build_renesas

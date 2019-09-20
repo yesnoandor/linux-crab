@@ -11,9 +11,9 @@ void lm75_parse_xml(const char *file)
 	string item, name, type;
 	int channel;
 
-	DbgFuncEntry();
+	//DbgFuncEntry();
 	
-	DbgPrintf("XML configure file = %s\r\n", file);
+	//DbgPrintf("XML configure file = %s\r\n", file);
 	
 	fp = fopen(file, "r");
 	tree = mxmlLoadFile(NULL, fp, MXML_TEXT_CALLBACK);
@@ -41,23 +41,23 @@ void lm75_parse_xml(const char *file)
 		if (name == "node")
 		{
 			lm75_params.node.name  = valueNode->child->value.text.string;
-			DbgPrintf("name = %s \r\n",lm75_params.node.name.c_str());
+			//DbgPrintf("name = %s \r\n",lm75_params.node.name.c_str());
 		}
 		else if (name == "max")
 		{
 			lm75_params.node.max_value = stoi((valueNode->child->value.text.string), NULL, 10);
-			DbgPrintf("max = %d \r\n", lm75_params.node.max_value);
+			//DbgPrintf("max = %d \r\n", lm75_params.node.max_value);
 		}
 		else if (name == "min")
 		{
 			lm75_params.node.min_value = stoi((valueNode->child->value.text.string), NULL, 10);
-			DbgPrintf("min = %d \n",lm75_params.node.min_value);
+			//DbgPrintf("min = %d \n",lm75_params.node.min_value);
 		}
 	}
 
 	mxmlDelete(tree);
 
-	DbgFuncExit();
+	//DbgFuncExit();
 }
 
 
@@ -68,10 +68,10 @@ lm75_params_t * get_lm75_params(void)
 
 void lm75_info_printf(void)
 {
-	DbgGood("++++++++++LM76 Info++++++++++\r\n");
-	DbgGood("node_base = %s\r\n",lm75_params.node_base.c_str());
-	DbgGood("name = %s\r\n",lm75_params.node.name.c_str());
+	DbgPrintf("++++++++++LM76 Info++++++++++\r\n");
+	DbgPrintf("node_base = %s\r\n",lm75_params.node_base.c_str());
+	DbgPrintf("name = %s\r\n",lm75_params.node.name.c_str());
 
-	DbgGood("max = %d\r\n",lm75_params.node.max_value);
-	DbgGood("min = %d\r\n",lm75_params.node.min_value);
+	DbgPrintf("max = %d\r\n",lm75_params.node.max_value);
+	DbgPrintf("min = %d\r\n",lm75_params.node.min_value);
 }

@@ -73,10 +73,11 @@ void ZeusDemo(void)
 	}while(1);
 
 	
-	// 构造json格式的测试结果
-	//vector<string> event;
+	// 构造json  格式的测试结果
+	vector<string> event;
+	string eventJson;
+	
 	CJsonObject json;
-	json.Clear();
 	
 	for (vector<string>::iterator it = processVector.begin(); it != processVector.end(); ++it)
 	{
@@ -90,14 +91,26 @@ void ZeusDemo(void)
 		cout << "process name : " << processName << endl;
 		cout << "exit value  : " << exitValue << endl;
 		cout << "return desc  : " << desc << endl;
-		
-		json["event"].Add(processName,desc);
-	}
-	string eventJson = json["event"].ToString();
-	
-	cout << eventJson << endl;
-	
 
+		json.Clear();
+		json["event"].Add("id","1");
+		json["event"].Add("date","20190216092812");
+		json["event"].Add("mod",processName);
+		if(exitValue)
+		{
+			json["event"].Add("error",desc);
+		}
+		else
+		{
+			json["event"].Add("info",desc);
+		}
+		
+		eventJson = json["event"].ToString();
+		cout << "eventJson = " << eventJson << endl;
+
+		event.push_back(eventJson);
+	}
+	
 	// 获得网络传输参数
 	parseConfig config(PROCESS_SETTING_FILE_PATH);
 	string ip = config.getSocketIp();
@@ -110,7 +123,14 @@ void ZeusDemo(void)
 	socketTcp socket;
 	socket.start(ip,port);
 	sleep(2);
-	socket.send((unsigned char *)eventJson.c_str(),eventJson.length() + 1);
+	
+	for (vector<string>::iterator it = event.begin(); it != event.end(); ++it)
+	{
+		eventJson = *it;
+		cout << "item : " << eventJson << endl;
+		socket.send((unsigned char *)eventJson.c_str(),eventJson.length() + 1);
+	}
+	//socket.send((unsigned char *)eventJson.c_str(),eventJson.length() + 1);
 
 	sleep(2);
 	socket.stop();

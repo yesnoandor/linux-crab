@@ -29,6 +29,8 @@
 #include	<sys/types.h>
 #include	<sys/stat.h>
 #include	<sys/ioctl.h>
+#include	<sys/mman.h>
+
 
 // Linux
 #include 	<linux/types.h>
@@ -45,14 +47,20 @@
 #include	"CJsonObject.h"
 
 #include	"mxml.h"
+#include	"pmem.h"
 
 // User
 #include	"misc.h"
 #include	"node.h"
 #include	"error.h"
+
+#define		DEBUG_Y
 #include	"debug.h"
 
 #define	PROCESS_CONFIG_FILE_PATH	"./configure.xml"
 #define	PROCESS_SETTING_FILE_PATH	"./setting.xml"
+
+#define	MAX_TEMP_CHARS_SIZE		80
+
 
 #endif

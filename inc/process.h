@@ -71,6 +71,7 @@ public:
 	
 private:
 	int get_process_id(string path);
+	string get_process_name(int pid);
 	string get_process_path(int pid);
 	
 	void remove_process_info(int pid);

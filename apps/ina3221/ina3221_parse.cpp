@@ -17,25 +17,30 @@ void ina3221_parse_xml(const char *file)
 	fp = fopen(file, "r");
 	tree = mxmlLoadFile(NULL, fp, MXML_TEXT_CALLBACK);
 	fclose(fp);
+	
 	root = mxmlFindElement(tree, tree, "root", NULL, NULL, MXML_DESCEND);
 	topItem = mxmlFindElement(root, tree, "item", NULL, NULL, MXML_DESCEND);
 	item = mxmlElementGetAttr(topItem, "name");
 	if (item != "ina3221")
 	{
+		DbgError("item mismatch!\r\n");
 		return;
 	}
+
 	baseValueNode = mxmlFindElement(topItem, topItem, "value", NULL, NULL, MXML_DESCEND);
 	name = mxmlElementGetAttr(baseValueNode, "name");
 	if (name == "node_base")
 	{
 		ina3221_params.node_base = baseValueNode->child->value.text.string;
 	}
+
 	for (channelItem = mxmlFindElement(baseValueNode, topItem, "item", NULL, NULL, MXML_NO_DESCEND); channelItem != NULL; channelItem = mxmlFindElement(channelItem, topItem, "item", NULL, NULL, MXML_NO_DESCEND))
 	{
 		channel = stoi(mxmlElementGetAttr(channelItem, "channel"), NULL, 10);
-		//printf("channel = %d \n", channel);
 		enable = mxmlElementGetAttr(channelItem, "enable");
-		//printf("enable = %s \n", enable.c_str());
+
+		DbgPrintf("channel = %d \r\n", channel);
+		DbgPrintf("enable = %s \r\n", enable.c_str());
 		if (enable == "true")
 		{
 			ina3221_params.channel[channel].enable = 1;
@@ -46,6 +51,7 @@ void ina3221_parse_xml(const char *file)
 			ina3221_params.channel[channel].enable = 0;
 			continue;
 		}
+		
 		for (mxml_node_t *valueNode = mxmlFindElement(channelItem, channelItem, "value", NULL, NULL, MXML_DESCEND); valueNode != NULL; valueNode = mxmlFindElement(valueNode, channelItem, "value", NULL, NULL, MXML_NO_DESCEND))
 		{
 			name = mxmlElementGetAttr(valueNode, "name");
@@ -63,9 +69,15 @@ void ina3221_parse_xml(const char *file)
 			else if (name == "min")
 			{
 				ina3221_params.channel[channel].node[nodeIndex].min_value = strtol((valueNode->child->value.text.string), NULL, 10);
-				//printf("nodeIndex = %d ,min = %ld \n", nodeIndex, ina3221_params.channel[channel].node[nodeIndex].min_value);
+				//printf("nodeIndex = %d,min = %ld \n", nodeIndex, ina3221_params.channel[channel].node[nodeIndex].min_value);
 			}
 		}
+
+		DbgPrintf("channel = %d\r\n",channel);
+		DbgPrintf("enable = %d\r\n",ina3221_params.channel[channel].enable);
+		DbgPrintf("node_name = %s\r\n",ina3221_params.channel[channel].node[0].node_name.c_str());
+		DbgPrintf("max_value = %ld\r\n",ina3221_params.channel[channel].node[0].max_value );
+		DbgPrintf("min_value = %ld\r\n",ina3221_params.channel[channel].node[0].min_value );
 	}
 
 	mxmlDelete(tree);

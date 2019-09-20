@@ -1,6 +1,7 @@
 #ifndef INA3221_PARSE_H_
 #define INA3221_PARSE_H_
 
+#define		INA3221_MAX_CHANNEL		3
 
 //#ifdef __cplusplus
 //	extern "C" {

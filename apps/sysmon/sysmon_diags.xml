@@ -3,46 +3,366 @@
 <root>
 	<module name="sysmon">
 		<value name="node_base">/sys/bus/iio/devices/iio:device0</value>
-		
 		<item channel="0" type="temp">
 			<value name="offset">in_temp0_ps_temp_offset</value>
 			<value name="raw">in_temp0_ps_temp_raw</value>
 			<value name="scale">in_temp0_ps_temp_scale</value>
-			<value name="max">2224</value>
-			<value name="min">2224</value>
+			<value name="max">100</value>
+			<value name="min">20</value>
 		</item>
 
 		<item channel="1" type="temp">
 			<value name="offset">in_temp1_remote_temp_offset</value>
 			<value name="raw">in_temp1_remote_temp_raw</value>
 			<value name="scale">in_temp1_remote_temp_scale</value>
-			<value name="max">2224</value>
-			<value name="min">2224</value>
+			<value name="max">100</value>
+			<value name="min">20</value>
 		</item>
-
-		<item channel="2" type="temp">
-			<value name="offset">in_temp2_pl_temp_offset</value>
-			<value name="raw">in_temp2_pl_temp_raw</value>
-			<value name="scale">in_temp2_pl_temp_scale</value>
-			<value name="max">2224</value>
-			<value name="min">2224</value>
-		</item>
-		
+	
 		<item channel="0" type="voltage">
 			<value name="raw">in_voltage0_vcc_pspll0_raw</value>
 			<value name="scale">in_voltage0_vcc_pspll0_scale</value>
-			<value name="max">2224</value>
-			<value name="min">2224</value>
+			<value name="max">1.2</value>
+			<value name="min">1.0</value>
 		</item>
 
 		<item channel="1" type="voltage">
 			<value name="raw">in_voltage1_vcc_psbatt_raw</value>
-			<value name="scale">in_voltage1_vcc_psbatt_raw</value>
-			<value name="max">2224</value>
-			<value name="min">2224</value>
+			<value name="scale">in_voltage1_vcc_psbatt_scale</value>
+			<value name="max">1.5</value>
+			<value name="min">0</value>
+		</item>
+
+		<item channel="2" type="voltage">
+			<value name="raw">in_voltage2_vccint_raw</value>
+			<value name="scale">in_voltage2_vccint_scale</value>
+			<value name="max">0.9</value>
+			<value name="min">0.7</value>
+		</item>
+
+		<item channel="3" type="voltage">
+			<value name="raw">in_voltage3_vccbram_raw</value>
+			<value name="scale">in_voltage3_vccbram_scale</value>
+			<value name="max">0.9</value>
+			<value name="min">0.8</value>
+		</item>
+
+		<item channel="4" type="voltage">
+			<value name="raw">in_voltage4_vccaux_raw</value>
+			<value name="scale">in_voltage4_vccaux_scale</value>
+			<value name="max">1.9</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="5" type="voltage">
+			<value name="raw">in_voltage5_vcc_psddrpll_raw</value>
+			<value name="scale">in_voltage5_vcc_psddrpll_scale</value>
+			<value name="max">1.9</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="6" type="voltage">
+			<value name="raw">in_voltage6_vccpsintfpddr_raw</value>
+			<value name="scale">in_voltage6_vccpsintfpddr_scale</value>
+			<value name="max">0.9</value>
+			<value name="min">0.8</value>
+		</item>
+
+		<item channel="7" type="voltage">
+			<value name="raw">in_voltage7_vccpsintlp_raw</value>
+			<value name="scale">in_voltage7_vccpsintlp_scale</value>
+			<value name="max">0.9</value>
+			<value name="min">0.8</value>
+		</item>
+
+		<item channel="8" type="voltage">
+			<value name="raw">in_voltage8_vccpsintfp_raw</value>
+			<value name="scale">in_voltage8_vccpsintfp_scale</value>
+			<value name="max">0.9</value>
+			<value name="min">0.8</value>
+		</item>
+
+		<item channel="9" type="voltage">
+			<value name="raw">in_voltage9_vccpsaux_raw</value>
+			<value name="scale">in_voltage9_vccpsaux_scale</value>
+			<value name="max">1.9</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="10" type="voltage">
+			<value name="raw">in_voltage10_vccpsddr_raw</value>
+			<value name="scale">in_voltage10_vccpsddr_scale</value>
+			<value name="max">1.5</value>
+			<value name="min">1.1</value>
+		</item>
+
+		<item channel="11" type="voltage">
+			<value name="raw">in_voltage11_vccpsio3_raw</value>
+			<value name="scale">in_voltage11_vccpsio3_scale</value>
+			<value name="max">3.4</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="12" type="voltage">
+			<value name="raw">in_voltage12_vccpsio0_raw</value>
+			<value name="scale">in_voltage12_vccpsio0_scale</value>
+			<value name="max">3.4</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="13" type="voltage">
+			<value name="raw">in_voltage13_vccpsio1_raw</value>
+			<value name="scale">in_voltage13_vccpsio1_scale</value>
+			<value name="max">3.4</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="14" type="voltage">
+			<value name="raw">in_voltage14_vccpsio2_raw</value>
+			<value name="scale">in_voltage14_vccpsio2_scale</value>
+			<value name="max">3.4</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="15" type="voltage">
+			<value name="raw">in_voltage15_psmgtravcc_raw</value>
+			<value name="scale">in_voltage15_psmgtravcc_scale</value>
+			<value name="max">0.9</value>
+			<value name="min">0.7</value>
+		</item>
+
+		<item channel="16" type="voltage">
+			<value name="raw">in_voltage16_psmgtravtt_raw</value>
+			<value name="scale">in_voltage16_psmgtravtt_scale</value>
+			<value name="max">1.9</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="17" type="voltage">
+			<value name="raw">in_voltage17_vccams_raw</value>
+			<value name="scale">in_voltage17_vccams_scale</value>
+			<value name="max">0.7</value>
+			<value name="min">0.5</value>
 		</item>
 
     </module>
+		<module name="sysmon_pl">
+		<value name="node_base">/sys/bus/iio/devices/iio:device1</value>
+		<item channel="0" type="temp">
+			<value name="offset">in_temp0_pl_temp_offset</value>
+			<value name="raw">in_temp0_pl_temp_raw</value>
+			<value name="scale">in_temp0_pl_temp_scale</value>
+			<value name="max">100</value>
+			<value name="min">20</value>
+		</item>
+
+		<item channel="0" type="voltage">
+			<value name="raw">in_voltage0_vccint_raw</value>
+			<value name="scale">in_voltage0_vccint_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.8</value>
+		</item>
+	
+		<item channel="1" type="voltage">
+			<value name="raw">in_voltage1_vccaux_raw</value>
+			<value name="scale">in_voltage1_vccaux_scale</value>
+			<value name="max">1.9</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="2" type="voltage">
+			<value name="raw">in_voltage2_vccbram_raw</value>
+			<value name="scale">in_voltage2_vccbram_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.8</value>
+		</item>
+
+		<item channel="3" type="voltage">
+			<value name="raw">in_voltage3_vccpsintlp_raw</value>
+			<value name="scale">in_voltage3_vccpsintlp_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.8</value>
+		</item>
+
+		<item channel="4" type="voltage">
+			<value name="raw">in_voltage4_vccpsintfp_raw</value>
+			<value name="scale">in_voltage4_vccpsintfp_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.8</value>
+		</item>
+
+		<item channel="5" type="voltage">
+			<value name="raw">in_voltage5_vccpsaux_raw</value>
+			<value name="scale">in_voltage5_vccpsaux_scale</value>
+			<value name="max">1.9</value>
+			<value name="min">1.7</value>
+		</item>
+
+		<item channel="6" type="voltage">
+			<value name="raw">in_voltage6_vccvrefp_raw</value>
+			<value name="scale">in_voltage6_vccvrefp_scale</value>
+			<value name="max">1.3</value>
+			<value name="min">1.2</value>
+		</item>
+
+		<item channel="7" type="voltage">
+			<value name="raw">in_voltage7_vccvrefn_raw</value>
+			<value name="scale">in_voltage7_vccvrefn_scale</value>
+			<value name="max">1.3</value>
+			<value name="min">0</value>
+		</item>
+
+		<item channel="8" type="voltage">
+			<value name="raw">in_voltage8_vccvpvn_raw</value>
+			<value name="scale">in_voltage8_vccvpvn_scale</value>
+			<value name="max">1.3</value>
+			<value name="min">0</value>
+		</item>
+
+		<item channel="9" type="voltage">
+			<value name="raw">in_voltage9_vaux0_raw</value>
+			<value name="scale">in_voltage9_vaux0_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="10" type="voltage">
+			<value name="raw">in_voltage10_vaux1_raw</value>
+			<value name="scale">in_voltage10_vaux1_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="11" type="voltage">
+			<value name="raw">in_voltage11_vaux2_raw</value>
+			<value name="scale">in_voltage11_vaux2_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="12" type="voltage">
+			<value name="raw">in_voltage12_vaux3_raw</value>
+			<value name="scale">in_voltage12_vaux3_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="13" type="voltage">
+			<value name="raw">in_voltage13_vaux4_raw</value>
+			<value name="scale">in_voltage13_vaux4_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="14" type="voltage">
+			<value name="raw">in_voltage14_vaux5_raw</value>
+			<value name="scale">in_voltage14_vaux5_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="15" type="voltage">
+			<value name="raw">in_voltage15_vaux6_raw</value>
+			<value name="scale">in_voltage15_vaux6_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="16" type="voltage">
+			<value name="raw">in_voltage16_vaux7_raw</value>
+			<value name="scale">in_voltage16_vaux7_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="17" type="voltage">
+			<value name="raw">in_voltage17_vaux8_raw</value>
+			<value name="scale">in_voltage17_vaux8_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="18" type="voltage">
+			<value name="raw">in_voltage18_vaux9_raw</value>
+			<value name="scale">in_voltage18_vaux9_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="19" type="voltage">
+			<value name="raw">in_voltage19_vaux10_raw</value>
+			<value name="scale">in_voltage19_vaux10_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="20" type="voltage">
+			<value name="raw">in_voltage20_vaux11_raw</value>
+			<value name="scale">in_voltage20_vaux11_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="21" type="voltage">
+			<value name="raw">in_voltage21_vaux12_raw</value>
+			<value name="scale">in_voltage21_vaux12_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="22" type="voltage">
+			<value name="raw">in_voltage22_vaux13_raw</value>
+			<value name="scale">in_voltage22_vaux13_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="23" type="voltage">
+			<value name="raw">in_voltage23_vaux14_raw</value>
+			<value name="scale">in_voltage23_vaux14_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="24" type="voltage">
+			<value name="raw">in_voltage24_vaux15_raw</value>
+			<value name="scale">in_voltage24_vaux15_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+		
+		<!--
+		<item channel="25" type="voltage">
+			<value name="raw">in_voltage25_vuser0_raw</value>
+			<value name="scale">in_voltage25_vuser0_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="26" type="voltage">
+			<value name="raw">in_voltage26_vuser1_raw</value>
+			<value name="scale">in_voltage26_vuser1_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="27" type="voltage">
+			<value name="raw">in_voltage27_vuser2_raw</value>
+			<value name="scale">in_voltage27_vuser2_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+
+		<item channel="28" type="voltage">
+			<value name="raw">in_voltage28_vuser3_raw</value>
+			<value name="scale">in_voltage28_vuser3_scale</value>
+			<value name="max">1.0</value>
+			<value name="min">0.0</value>
+		</item>
+		-->
+
+    </module>
+
 
 	<!--
 		<item name="ret">

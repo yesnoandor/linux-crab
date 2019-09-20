@@ -11,9 +11,9 @@ void ads7828_parse_xml(const char *file)
 	string item, name, enable;
 	int channel;
 
-	DbgFuncEntry();
+	//DbgFuncEntry();
 	
-	DbgPrintf("XML configure file = %s\r\n", file);
+	//DbgPrintf("XML configure file = %s\r\n", file);
 
 	fp = fopen(file, "r");
 	tree = mxmlLoadFile(NULL, fp, MXML_TEXT_CALLBACK);
@@ -22,8 +22,9 @@ void ads7828_parse_xml(const char *file)
 	root = mxmlFindElement(tree, tree, "root", NULL, NULL, MXML_DESCEND);
 	topItem = mxmlFindElement(root, tree, "item", NULL, NULL, MXML_DESCEND);
 	item = mxmlElementGetAttr(topItem, "name");
-	if (item != "ina3221")
+	if (item != "ads7828")
 	{
+		DbgError("item mismatch!\r\n");
 		return;
 	}
 	
@@ -37,9 +38,10 @@ void ads7828_parse_xml(const char *file)
 	for (channelItem = mxmlFindElement(baseValueNode, topItem, "item", NULL, NULL, MXML_NO_DESCEND); channelItem != NULL; channelItem = mxmlFindElement(channelItem, topItem, "item", NULL, NULL, MXML_NO_DESCEND))
 	{
 		channel = stoi(mxmlElementGetAttr(channelItem, "channel"), NULL, 10);
-		//printf("channel = %d \n", channel);
 		enable = mxmlElementGetAttr(channelItem, "enable");
-		//printf("enable = %s \n", enable.c_str());
+
+		//DbgPrintf("channel = %d \r\n", channel);
+		//DbgPrintf("enable = %s \r\n", enable.c_str());
 		if (enable == "true")
 		{
 			ads7828_params.channel[channel].enable = 1;
@@ -69,14 +71,23 @@ void ads7828_parse_xml(const char *file)
 				//printf("nodeIndex = %d ,min = %ld \n", nodeIndex, ina3221_params.channel[channel].node[nodeIndex].min_value);
 			}
 		}
+
+		//DbgPrintf("node_name = %s\r\n",ads7828_params.channel[channel].node.node_name.c_str());
+		//DbgPrintf("max_value = %d\r\n",ads7828_params.channel[channel].node.max_value);
+		//DbgPrintf("min_value = %d\r\n",ads7828_params.channel[channel].node.min_value);
+	
 	}
 
 	mxmlDelete(tree);
 
-	DbgFuncExit();
+	//DbgFuncExit();
 }
 
 ads7828_params_t * get_ads7827_params(void)
 {
+	//DbgFuncEntry();
+
+	//DbgFuncExit();
+	
 	return &ads7828_params;
 }

@@ -112,6 +112,30 @@ int Process::get_process_id(string name)
 	return 0;
 }
 
+string Process::get_process_name(int pid)
+{
+	process_info_vector::iterator it;
+
+	process_info_t info;
+	string name;
+	
+	DbgFuncEntry();
+	
+	for (it = process_info.begin();it<process_info.end();++it)  
+	{
+		info = *it;
+		if(pid == info.pid)
+		{
+			name = info.name;
+			break;
+		}
+	}
+	
+	DbgFuncExit();
+
+	return name;
+}
+
 string Process::get_process_path(int pid)
 {
 	process_info_vector::iterator it;
@@ -535,6 +559,7 @@ int Process::get_exit_value(string name)
 	for (it = process_info.begin();it<process_info.end();++it)
 	{
 		info = *it;
+		
 		if(name == info.name)
 		{
 			ret = info.exit_value;

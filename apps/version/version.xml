@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+	<item name="hw_version" enable="true">
+		<value name="major">/sys/class/gpio/gpio385/value</value>
+		<value name="minor">/sys/class/gpio/gpio386/value</value>
+	</item>
+	
+	<item name="sw_version" enable="false">
+		<value name="version">1.0.0.0</value>
+	</item>
+</root>
+

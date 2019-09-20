@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+	<module name="memory">
+		<value name="address">0x500000000</value>
+		<value name="size">0x1000</value>
+	</module>
+</root>

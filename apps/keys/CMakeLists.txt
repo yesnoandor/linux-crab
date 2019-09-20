@@ -27,7 +27,7 @@ link_directories("${LIB_SOURCE_DIR}/so/${PLATFORM}")
 link_directories("${LIB_SOURCE_DIR}/a/${PLATFORM}")
 
 ## 链接线程库
-link_libraries(libpthread.so)
+#link_libraries(libpthread.so)
 
 # 查找目录下的所有源文件,并将名称保存到 DIR_SRCS 变量
 aux_source_directory(. DIR_SRCS)
@@ -38,6 +38,7 @@ add_executable(${APP_NAME} ${DIR_SRCS})
 
 # 添加链接库
 target_link_libraries(${APP_NAME} libmxml.a)
+target_link_libraries(${APP_NAME} libpthread.so)
 
 
 # ---------- 附加部分:输出调试信息 ----------

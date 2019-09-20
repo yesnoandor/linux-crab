@@ -8,6 +8,8 @@
 
 int get_node_item(const char * node,int &value);
 int set_node_item(const char * node,int value);
+int get_node_item(const char * node,double &value);
+int set_node_item(const char * node,double value);
 int get_node_item(const char * node,std::string &str);
 int set_node_item(const char * node,std::string str);
 

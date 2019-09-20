@@ -47,7 +47,7 @@ void ina2xx_parse_xml(const char *file)
 			if (name == "node")
 			{
 				ina2xx_params.node[nodeIndex].node_name = valueNode->child->value.text.string;	
-				DbgPrintf("name111 = %s\r\n",ina2xx_params.node[nodeIndex].node_name.c_str());
+				DbgPrintf("name = %s\r\n",ina2xx_params.node[nodeIndex].node_name.c_str());
 			}
 			else if (name == "max")
 			{

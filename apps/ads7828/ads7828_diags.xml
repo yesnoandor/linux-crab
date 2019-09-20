@@ -6,8 +6,8 @@
 		
 		<item channel="0" enable="true">
 			<value name="node">in0_input</value>
-			<value name="max">2224</value>
-			<value name="min">2224</value>
+			<value name="max">1900</value>
+			<value name="min">2100</value>
 		</item>
 		
 		<!--
@@ -26,6 +26,9 @@
 		</item>
 		
 		<item channel="4" enable="false">
+			<value name="node">in4_input</value>
+			<value name="max">1700</value>
+			<value name="min">1900</value>
 		</item>
 	
 		<item channel="5" enable="false">

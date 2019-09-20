@@ -2,12 +2,12 @@
 
 <root>
     <item name="sysfs" enable="true">
-        <value name="node">/sys/bus/i2c/devices/7-0054/eeprom</value>
+        <value name="node">/sys/bus/i2c/devices/0-0050/eeprom</value>
         <value name="offset">0x80</value>
         <value name="string">EEPROM:Test:01234567890!</value>
     </item>
 
-    <item name="devfs" enable="true">
+    <item name="devfs" enable="false">
         <value name="node">/dev/i2c-7</value>
         <value name="slaveaddr">0x54</value>
         <value name="offset">0x80</value>

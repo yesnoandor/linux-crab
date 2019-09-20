@@ -11,9 +11,9 @@ void at24cxx_parse_xml(const char *file)
 	mxml_node_t *tree, *root, *node;
 	string item, name;
 
-	DbgFuncEntry();
+	//DbgFuncEntry();
 
-	DbgPrintf("XML configure file = %s\r\n", file);
+	//DbgPrintf("XML configure file = %s\r\n", file);
 
 	fp = fopen(file, "r");
 	tree = mxmlLoadFile(NULL, fp, MXML_TEXT_CALLBACK);
@@ -91,7 +91,7 @@ void at24cxx_parse_xml(const char *file)
 
 	mxmlDelete(tree);
 
-	DbgFuncExit();
+	//DbgFuncExit();
 }
 
 

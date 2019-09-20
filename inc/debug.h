@@ -46,6 +46,10 @@ inline string className(const std::string& prettyFunction)
 #define DBG_C_LIGHT_GRAY   "\033[0;37m"
 #define DBG_C_WHITE        "\033[1;37m"
 
+#define MAX_DBG_BUFFER_SIZE		256
+
+#ifdef	DEBUG_Y
+
 #define	DbgFuncEntry()								\
 	printf(DBG_C_DARY_GRAY);						\
 	printf("%s::%s:++++++++++\r\n",__CLASS__,__FUNCTION__);		\
@@ -59,7 +63,43 @@ inline string className(const std::string& prettyFunction)
 	printf(DBG_C_NONE);								\
 	fflush(stdout);
 
-#define MAX_DBG_BUFFER_SIZE		256
+inline void DbgPrintf(const char *fmt, ...)
+{
+	char strings[MAX_DBG_BUFFER_SIZE];
+
+	va_list args;
+	va_start(args, fmt);
+	vsprintf(strings, fmt, args);
+	va_end(args);
+
+	printf("%s", strings);
+	printf(DBG_C_NONE);
+	fflush(stdout);
+}
+
+inline void DbgGood(const char *fmt, ...)
+{
+	char strings[MAX_DBG_BUFFER_SIZE];
+
+	va_list args;
+	va_start(args, fmt);
+	vsprintf(strings, fmt, args);
+	va_end(args);
+
+	printf(DBG_C_LIGHT_BLUE);
+	printf("%s",strings);
+	printf(DBG_C_NONE);
+
+	fflush(stdout);
+}
+#else
+
+#define	DbgFuncEntry()
+#define	DbgFuncExit()
+
+#define DbgPrintf(format, args...)					({}) 
+#define DbgGood(format, args...)					({}) 
+#endif
 
 inline void DbgError(const char *fmt, ...)
 {
@@ -87,36 +127,6 @@ inline void DbgWarn(const char *fmt, ...)
 	va_end(args);
 
 	printf(DBG_C_YELLOW);
-	printf("%s",strings);
-	printf(DBG_C_NONE);
-
-	fflush(stdout);
-}
-
-inline void DbgPrintf(const char *fmt, ...)
-{
-	char strings[MAX_DBG_BUFFER_SIZE];
-
-	va_list args;
-	va_start(args, fmt);
-	vsprintf(strings, fmt, args);
-	va_end(args);
-
-	printf("%s", strings);
-	printf(DBG_C_NONE);
-	fflush(stdout);
-}
-
-inline void DbgGood(const char *fmt, ...)
-{
-	char strings[MAX_DBG_BUFFER_SIZE];
-
-	va_list args;
-	va_start(args, fmt);
-	vsprintf(strings, fmt, args);
-	va_end(args);
-
-	printf(DBG_C_LIGHT_BLUE);
 	printf("%s",strings);
 	printf(DBG_C_NONE);
 
